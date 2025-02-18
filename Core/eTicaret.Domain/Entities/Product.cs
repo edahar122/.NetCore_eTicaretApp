@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eTicaret.Domain.Entities.Common;
 
 namespace eTicaret.Domain.Entities {
-    class Product {
+    public class Product : BaseEntity {
+        public string Name { get; set; }
+        public int Stock { get; set; }
+        public Decimal Price { get; set; }
     }
 }

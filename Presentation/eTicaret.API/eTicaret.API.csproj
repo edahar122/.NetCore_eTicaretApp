@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\eTicaret.Application\eTicaret.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\eTicaret.Persistance\eTicaret.Persistance.csproj" />
   </ItemGroup>
 
 </Project>
