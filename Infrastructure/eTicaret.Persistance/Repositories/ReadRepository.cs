@@ -1,31 +1,30 @@
 ﻿using eTicaret.Application.Repositories;
+using eTicaret.Domain.Entities.Common;
 using ETicaret.Persistance.Contexts;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace eTicaret.Persistance.Repositories {
-    public class ReadRepository<T> : IReadRepository<T> where T : class {
+    public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity {
 
         private readonly ETicaretDBContext _context;
 
         public ReadRepository(ETicaretDBContext context) {
             _context = context;
         }
-        DbSet<T> IRepository<T>.Table => throw new NotImplementedException();
+        public DbSet<T> Table 
+            => _context.Set<T>();
 
-        IQueryable<T> IReadRepository<T>.GetAll() {
-            throw new NotImplementedException();
-        }
+        public IQueryable<T> GetAll()
+            => Table;
 
-        Task<T> IReadRepository<T>.GetByIdAsync(string Id) {
-            throw new NotImplementedException();
-        }
+        public async Task<T> GetByIdAsync(string Id)
+            => await Table.FindAsync(Id);
 
-        Task<T> IReadRepository<T>.GetSingleAsync(System.Linq.Expressions.Expression<Func<T, bool>> method) {
-            throw new NotImplementedException();
-        }
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method)
+            => await Table.FirstOrDefaultAsync(method);
 
-        IQueryable<T> IReadRepository<T>.GetWhere(System.Linq.Expressions.Expression<Func<T, bool>> method) {
-            throw new NotImplementedException();
-        }
+        public IQueryable<T> GetWhere(Expression<Func<T, bool>> method)
+            => Table.Where(method);
     }
 }
